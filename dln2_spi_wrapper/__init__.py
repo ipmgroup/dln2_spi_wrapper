@@ -11,7 +11,7 @@ Main components:
 - SpiDev: Main class for SPI communication
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "IPM Group"
 __email__ = "ipm.grp@googlemail.com"
 __license__ = "Apache 2.0"
