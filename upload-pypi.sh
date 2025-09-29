@@ -22,9 +22,7 @@ fi
 echo "🚀 Uploading to PyPI (production)..."
 echo ""
 echo "⚠️  WARNING: This uploads to PRODUCTION PyPI!"
-echo "Make sure you have your PyPI API token set:"
-echo "   export TWINE_USERNAME=__token__"
-echo "   export TWINE_PASSWORD=pypi-YOUR_PYPI_TOKEN_HERE"
+echo "PyPI API token is configured in ~/.pypirc"
 echo ""
 
 read -p "Continue with PyPI upload? (y/N): " -n 1 -r

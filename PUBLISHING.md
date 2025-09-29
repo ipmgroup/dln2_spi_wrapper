@@ -31,16 +31,11 @@ This document explains how to publish the `dln2-spi-wrapper` package to PyPI.
 
    **Note**: Replace `YOUR_ACTUAL_*_TOKEN_HERE` with your actual API tokens from the websites above.
 
-4. **Alternative: Using environment variables** (more secure):
+4. **Tokens are configured in ~/.pypirc** (current setup):
    ```bash
-   # Set tokens as environment variables
-   export TWINE_USERNAME=__token__
-   export TWINE_PASSWORD=pypi-YOUR_TESTPYPI_TOKEN_HERE  # for TestPyPI
-   # OR for PyPI:
-   # export TWINE_PASSWORD=pypi-YOUR_PYPI_TOKEN_HERE
-   
-   # Then upload without ~/.pypirc
-   twine upload --repository testpypi dist/*
+   # Tokens are already configured in ~/.pypirc file
+   # No additional environment variables needed
+   # Ready to upload directly with make commands
    ```
 
 ## Development Workflow

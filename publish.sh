@@ -43,10 +43,8 @@ echo
 case $REPLY in
     1)
         echo ""
-        echo "� Uploading to TestPyPI..."
-        echo "Make sure you have set your TestPyPI credentials:"
-        echo "  export TWINE_USERNAME=__token__"
-        echo "  export TWINE_PASSWORD=pypi-YOUR_TESTPYPI_TOKEN"
+        echo "🚀 Uploading to TestPyPI..."
+        echo "TestPyPI credentials are configured in ~/.pypirc"
         echo ""
         read -p "Continue with TestPyPI upload? (y/n): " -n 1 -r
         echo
@@ -68,9 +66,7 @@ case $REPLY in
         echo ""
         echo "🚀 Uploading to PyPI (PRODUCTION)..."
         echo "⚠️  WARNING: This will publish to production PyPI!"
-        echo "Make sure you have set your PyPI credentials:"
-        echo "  export TWINE_USERNAME=__token__"
-        echo "  export TWINE_PASSWORD=pypi-YOUR_PYPI_TOKEN"
+        echo "PyPI credentials are configured in ~/.pypirc"
         echo ""
         read -p "Are you sure you want to upload to production PyPI? (y/n): " -n 1 -r
         echo
