@@ -16,25 +16,10 @@ Limitations / notes:
 
 from typing import List
 import struct
-import sys
-from pathlib import Path
 import time
 
-# Support running this module both as a package (import tools.dln_spidev)
-# and directly (python tools/dln_spidev.py). Try relative import first,
-# fall back to adding repository root to sys.path and importing absolutely.
-try:
-    from .dln2_spi_client import find_device, Dln2Usb, DLN2_SPI_SET_FRAME_SIZE
-except Exception:
-    # adjust path to repo root and import
-    REPO_ROOT = Path(__file__).resolve().parents[1]
-    if str(REPO_ROOT) not in sys.path:
-        sys.path.insert(0, str(REPO_ROOT))
-    from tools.dln2_spi_client import (
-        find_device,
-        Dln2Usb,
-        DLN2_SPI_SET_FRAME_SIZE,
-    )
+# Import from the same package
+from .dln2_spi_client import find_device, Dln2Usb, DLN2_SPI_SET_FRAME_SIZE
 
 
 class SpiDev:

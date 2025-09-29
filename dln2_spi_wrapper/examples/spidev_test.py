@@ -7,10 +7,6 @@ import sys
 from pathlib import Path
 import argparse
 
-# add repo root to sys.path so `import tools.*` works when run directly
-REPO_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO_ROOT))
-
 
 def main():
     p = argparse.ArgumentParser(description='spidev wrapper send test')
@@ -98,7 +94,7 @@ def main():
         # try DLN wrapper (deferred import)
         try:
             # only import the wrapper module, don't instantiate hardware
-            __import__('tools.spidev')
+            import dln2_spi_wrapper  # noqa: F401
             return 'dln'
         except Exception as e:
             dln_err = e
@@ -165,9 +161,9 @@ def main():
 
     # chosen == 'dln'
     try:
-        from tools.dln2_spidev import SpiDev
+        from dln2_spi_wrapper import SpiDev
     except Exception as e:
-        print('Failed to import DLN wrapper (tools.dln_spidev):', e)
+        print('Failed to import DLN wrapper (dln2_spi_wrapper):', e)
         print('If you want DLN backend, install pyusb: pip3 install pyusb')
         sys.exit(1)
 

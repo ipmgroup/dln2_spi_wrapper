@@ -5,17 +5,11 @@ Cycles bits-per-word (4..16), sets frame size on device and sends random data ev
 Depends on tools/dln2_spi_client.py (pyusb).
 """
 
-import sys
-from pathlib import Path
 import time
 import struct
 import random
 
-# Ensure repo root is on sys.path so `import tools.*` works when running script directly
-REPO_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO_ROOT))
-
-from tools.dln2_spi_client import find_device, Dln2Usb, DLN2_SPI_SET_FRAME_SIZE
+from ..dln2_spi_client import find_device, Dln2Usb, DLN2_SPI_SET_FRAME_SIZE
 
 WORDS = 1  # number of words per transfer (send exactly one word)
 DELAY = 1.0  # seconds between transfers
