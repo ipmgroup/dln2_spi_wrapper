@@ -8,7 +8,7 @@ version = "0.1.0"
 authors = [
     {name = "IPM Group", email = "contact@ipmgroup.dev"},
 ]
-description = "A Python library for interfacing with DLN2 SPI adapters with spidev-compatible API"
+description = "A Python library for DLN2 SPI adapters with spidev-compatible API. Originally developed for Pico USB IO Board."
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [

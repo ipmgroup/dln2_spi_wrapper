@@ -2,6 +2,8 @@
 
 A Python library for interfacing with DLN2 USB-to-SPI adapters with a **spidev-compatible API**. This package allows existing Python code written for `py-spidev` to work with DLN2 devices with minimal modifications.
 
+**Originally developed for the [Pico USB IO Board](https://github.com/ipmgroup/pico-usb-io-board)** - a Raspberry Pi Pico-based USB-to-SPI/I2C/GPIO adapter that implements the DLN2 protocol.
+
 ## Features
 
 - **spidev-compatible API**: Drop-in replacement for most `py-spidev` usage
@@ -10,6 +12,13 @@ A Python library for interfacing with DLN2 USB-to-SPI adapters with a **spidev-c
 - **Configurable parameters**: SPI mode, frequency, bits per word
 - **Built-in examples**: Ready-to-use test scripts and utilities
 - **Pure Python**: No compiled extensions, easy to install and distribute
+- **Pico USB IO Board support**: Native support for Raspberry Pi Pico-based DLN2 adapters
+
+## Supported Hardware
+
+- **[Pico USB IO Board](https://github.com/ipmgroup/pico-usb-io-board)** - Raspberry Pi Pico-based USB-to-SPI/I2C/GPIO adapter with DLN2 protocol implementation
+- **DLN2 devices** - USB-to-SPI adapters implementing the DLN2 protocol (VID: 0x1d50, PID: 0x6170)
+- **Compatible devices** - Any USB device that implements the DLN2 SPI interface
 
 ## Installation
 
@@ -39,7 +48,9 @@ pip install -e ".[dev]"
 
 - **Python 3.7+**
 - **pyusb**: Automatically installed as a dependency
-- **DLN2 device**: A DLN2 USB-to-SPI adapter (VID: 0x1d50, PID: 0x6170)
+- **DLN2-compatible device**: 
+  - [Pico USB IO Board](https://github.com/ipmgroup/pico-usb-io-board) (recommended)
+  - Any DLN2 USB-to-SPI adapter (VID: 0x1d50, PID: 0x6170)
 
 ### USB permissions (Linux)
 
@@ -361,12 +372,14 @@ This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) fo
 
 ## Acknowledgments
 
+- Originally developed for the [Pico USB IO Board](https://github.com/ipmgroup/pico-usb-io-board) project
 - Based on DLN2 protocol implementation
 - Inspired by the `py-spidev` library API
 - Thanks to the USB and embedded development communities
 
 ## Related Projects
 
+- **[Pico USB IO Board](https://github.com/ipmgroup/pico-usb-io-board)**: Raspberry Pi Pico-based USB-to-SPI/I2C/GPIO adapter
 - [py-spidev](https://github.com/doceme/py-spidev): Original spidev Python bindings
 - [libusb](https://libusb.info/): USB library for cross-platform USB device access
 - [DLN2 Linux Driver](https://github.com/torvalds/linux/tree/master/drivers/mfd): Official Linux kernel driver
