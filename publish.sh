@@ -12,17 +12,7 @@ if [[ "$VIRTUAL_ENV" == "" ]]; then
     exit 1
 fi
 
-# Check if we have API token
-if [[ "$TWINE_PASSWORD" == "" ]]; then
-    echo "❌ TWINE_PASSWORD environment variable not set."
-    echo "   Set your TestPyPI API token:"
-    echo "   export TWINE_USERNAME=__token__"
-    echo "   export TWINE_PASSWORD=pypi-YOUR_TESTPYPI_TOKEN"
-    exit 1
-fi
-
 echo "✅ Virtual environment: $VIRTUAL_ENV"
-echo "✅ TWINE credentials configured"
 
 # Clean and build
 echo ""
@@ -42,21 +32,64 @@ echo "📋 Package contents:"
 make upload-test-dry
 
 echo ""
-read -p "🚀 Upload to TestPyPI? (y/n): " -n 1 -r
+echo "🔧 Publishing Options:"
+echo "1) TestPyPI (for testing) - requires TestPyPI API token"
+echo "2) PyPI (production) - requires PyPI API token" 
+echo "3) Cancel"
+echo ""
+read -p "Choose option (1/2/3): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "📤 Uploading to TestPyPI..."
-    make upload-test
-    
-    echo ""
-    echo "✅ Upload completed!"
-    echo ""
-    echo "🔍 To test the uploaded package:"
-    echo "   pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dln2-spi-wrapper"
-    echo ""
-    echo "🌐 View on TestPyPI:"
-    echo "   https://test.pypi.org/project/dln2-spi-wrapper/"
-else
-    echo "❌ Upload cancelled by user"
-    exit 0
-fi
+
+case $REPLY in
+    1)
+        echo ""
+        echo "� Uploading to TestPyPI..."
+        echo "Make sure you have set your TestPyPI credentials:"
+        echo "  export TWINE_USERNAME=__token__"
+        echo "  export TWINE_PASSWORD=pypi-YOUR_TESTPYPI_TOKEN"
+        echo ""
+        read -p "Continue with TestPyPI upload? (y/n): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            make upload-test
+            echo ""
+            echo "✅ TestPyPI upload completed!"
+            echo ""
+            echo "🔍 To test the uploaded package:"
+            echo "   pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple dln2-spi-wrapper"
+            echo ""
+            echo "🌐 View on TestPyPI:"
+            echo "   https://test.pypi.org/project/dln2-spi-wrapper/"
+        else
+            echo "❌ TestPyPI upload cancelled"
+        fi
+        ;;
+    2)
+        echo ""
+        echo "🚀 Uploading to PyPI (PRODUCTION)..."
+        echo "⚠️  WARNING: This will publish to production PyPI!"
+        echo "Make sure you have set your PyPI credentials:"
+        echo "  export TWINE_USERNAME=__token__"
+        echo "  export TWINE_PASSWORD=pypi-YOUR_PYPI_TOKEN"
+        echo ""
+        read -p "Are you sure you want to upload to production PyPI? (y/n): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            make upload-pypi
+            echo ""
+            echo "🎉 PyPI upload completed!"
+            echo ""
+            echo "🔍 Your package is now available:"
+            echo "   pip install dln2-spi-wrapper"
+            echo ""
+            echo "🌐 View on PyPI:"
+            echo "   https://pypi.org/project/dln2-spi-wrapper/"
+        else
+            echo "❌ PyPI upload cancelled"
+        fi
+        ;;
+    3|*)
+        echo "❌ Upload cancelled by user"
+        exit 0
+        ;;
+esac

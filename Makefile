@@ -52,14 +52,34 @@ upload-test-dry:  ## Dry-run upload to TestPyPI (check without uploading)
 	@ls -la dist/
 	@echo "=== To actually upload, run: make upload-test ==="
 
-upload:  ## Upload to PyPI
+upload:  ## Upload to PyPI (production)
 	@pip show twine >/dev/null 2>&1 || pip install twine
 	python -m twine upload dist/*
+
+upload-pypi:  ## Upload to PyPI (production) - alias
+	@pip show twine >/dev/null 2>&1 || pip install twine
+	python -m twine upload --repository pypi dist/*
 
 ##@ Documentation
 
 docs:  ## Build documentation (if using Sphinx)
 	@echo "Documentation building not implemented yet"
+
+help-upload:  ## Show upload help and instructions
+	@echo "📦 PyPI Upload Instructions:"
+	@echo ""
+	@echo "1️⃣  Get PyPI API token: https://pypi.org/manage/account/token/"
+	@echo "2️⃣  Set credentials:"
+	@echo "     export TWINE_USERNAME=__token__"
+	@echo "     export TWINE_PASSWORD=pypi-YOUR_TOKEN_HERE"
+	@echo ""
+	@echo "3️⃣  Upload to TestPyPI (testing):"
+	@echo "     make upload-test"
+	@echo ""
+	@echo "4️⃣  Upload to PyPI (production):"
+	@echo "     make upload-pypi"
+	@echo ""
+	@echo "📝 Or use interactive script: ./publish.sh"
 
 ##@ Testing package
 
